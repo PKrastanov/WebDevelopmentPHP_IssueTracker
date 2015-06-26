@@ -26,9 +26,9 @@ class IssueModel extends BaseModel {
         return false;
     }
 
-    public function editIssue($title, $description, $state) {
-        $statement = self::$db->prepare("UPDATE Issues SET title = ?, description = ?, state = ?");
-        $statement->bind_param("sss", $title, $description, $state);
+    public function editIssue($title, $description, $state, $id) {
+        $statement = self::$db->prepare("UPDATE Issues SET title = ?, description = ?, state = ? WHERE id = ?");
+        $statement->bind_param("sssi", $title, $description, $state, $id);
         $statement->execute();
 
         if($statement) {

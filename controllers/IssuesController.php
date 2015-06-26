@@ -30,10 +30,11 @@ class IssuesController extends BaseController {
             $title = $_POST['title'];
             $description = $_POST['description'];
             $state = $_POST['state'];
-            $created = $this->issuesModel->editIssue($title, $description, $state);
+            $id = $_POST['id'];
+            $created = $this->issuesModel->editIssue($title, $description, $state, $id);
 
             if ($created) {
-                $this->redirectToUrl('/issues/details/' . $_POST['id']);
+                $this->redirectToUrl('/issues/details/' . $id);
             }
             else {
                 die ("Can not edit issue!");

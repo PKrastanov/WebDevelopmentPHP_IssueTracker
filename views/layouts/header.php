@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/content/styles/bootstrap.css.map"/>
     <link rel="stylesheet" href="/content/styles/bootstrap.min.css"/>
     <link rel="stylesheet" href="/content/styles/styles.css"/>
+    <script src="/content/jquery-1.11.3.min.js"></script>
+    <script src="/content/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="row">
