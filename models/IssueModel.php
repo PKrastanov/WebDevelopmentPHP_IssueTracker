@@ -36,6 +36,7 @@ class IssueModel extends BaseModel {
     }
 
     public function editIssue($title, $description, $state, $id) {
+        $this->addCommentIfStateChange($state, $id);
         $statement = self::$db->prepare("UPDATE Issues SET title = ?, description = ?, state = ? WHERE id = ?");
         $statement->bind_param("sssi", $title, $description, $state, $id);
         $statement->execute();
@@ -57,5 +58,12 @@ class IssueModel extends BaseModel {
         }
 
         return false;
+    }
+
+    public function addCommentIfStateChange($state, $id) {
+        $issue = $this->getIssueById($id);
+        if ($issue['state'] != $state) {
+            $this->createComment("Issue state changed to: " . $state, $id, $_SESSION['username']);
+        }
     }
 }

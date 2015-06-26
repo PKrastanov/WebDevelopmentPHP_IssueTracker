@@ -58,7 +58,7 @@ class IssuesController extends BaseController {
         $this->authorize();
         if ($this->isPost()) {
             $comment = htmlspecialchars($_POST['comment']);
-            $id = $_POST['id'];
+            $id = htmlspecialchars($_POST['id']);
             $authorName = htmlspecialchars($_SESSION['username']);
             $created = $this->issuesModel->createComment($comment, $id, $authorName);
 
@@ -66,7 +66,7 @@ class IssuesController extends BaseController {
                 $this->redirectToUrl('/issues/details/' . $id);
             }
             else {
-                die ("Can not create issue!");
+                $this->addInfoNotification('You can\'t comment this issue.');
             }
         }
     }
