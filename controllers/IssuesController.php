@@ -7,9 +7,13 @@ class IssuesController extends BaseController {
     }
 
     public function index() {
-        $this->issues = $this->issuesModel->getAll();
+        $this->issues = $this->issuesModel->getAllIssues();
     }
 
     public function create() {
+    }
+
+    public function details() {
+        $this->issue = $this->issuesModel->getIssueById($this->params[0]);
     }
 }

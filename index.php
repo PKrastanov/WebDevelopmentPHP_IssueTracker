@@ -29,7 +29,7 @@ if (count($requestParts) >= 4) {
 
 $controllerClassName = ucfirst($controllerName) . 'Controller';
 if (class_exists($controllerClassName)) {
-    $controller = new $controllerClassName($controllerName, $actionName);
+    $controller = new $controllerClassName($controllerName, $actionName, $params);
     if (method_exists($controller, $actionName)) {
         // Call $controller->$action($params)
         call_user_func_array(array($controller, $actionName), $params);

@@ -1,17 +1,11 @@
 <div class="jumbotron">
+    <ul class="list-group">
     <?php
     foreach ($this->issues as $issue) : ?>
-        <? if ($issue['status'] === "resolved") :?>
-            <div class="panel panel-warning">
-        <? else: ?>
-            <div class="panel panel-success">
-        <? endif; ?>
-            <div class="panel-heading">
-                <h3 class="panel-title"><?= htmlspecialchars($issue['title']) ?></h3>
-            </div>
-            <div class="panel-body">
-                <?= htmlspecialchars($issue['description']) ?>
-            </div>
-        </div>
+        <li class="list-group-item" onclick="window.location='/issues/details/<?= $issue['id'] ?>'">
+            <span class="badge"><?= htmlspecialchars($issue['state']) ?></span>
+            <?= htmlspecialchars($issue['title']) ?>
+        </li>
     <?php endforeach ?>
+    </ul>
 </div>
