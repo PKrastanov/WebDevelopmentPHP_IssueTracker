@@ -4,12 +4,17 @@ abstract class BaseController {
     protected $action;
     protected $controller;
     protected $params;
+    protected $isLoggedIn;
 
     public function __construct($controller, $action, $params) {
         $this->controller = $controller;
         $this->action = $action;
         $this->params = $params;
         $this->onInit();
+
+        if(isset($_SESSION['username'])) {
+            $this->isLoggedIn = true;
+        }
     }
 
     public function onInit() {

@@ -1,11 +1,12 @@
 <?php
 
+session_start();
+
 include_once('includes/config.php');
 
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $requestParts = explode('/', $requestPath);
 
-//Get Controller and Action Name
 $controllerName = DEFAULT_CONTROLLER;
 $actionName = DEFAULT_ACTION;
 if (count($requestParts) >= 2 && $requestParts[1] != '') {

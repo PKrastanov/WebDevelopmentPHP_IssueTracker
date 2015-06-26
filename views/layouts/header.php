@@ -19,19 +19,21 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                         <ul class="nav navbar-nav">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/issues">Issues</a></li>
+                            <?php /*if ($this->isLoggedIn) : */?>
+                                <li><a href="/issues/create">Create Issue</a></li>
+                            <?php /*endif; */?>
                         </ul>
-                        <? if ($_SESSION['username'] == null) : ?>
+                        <?php if ($this->isLoggedIn) : ?>
                             <ul class="nav navbar-nav navbar-right">
-                                <li>Hello <? echo $_SESSION['username'] ?>
-                                    <form action="/account/logout"><input type="submit" value="Logout"/></form>
-                                </li>
+                                <li><a>Hello <?php echo $_SESSION['username'] ?></a></li>
+                                <li><a href="/account/logout">Logout</a></li>
                             </ul>
-                        <? else : ?>
+                        <?php endif; ?>
+                        <?php if (!$this->isLoggedIn) : ?>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="/account/login">Login</a></li>
                             </ul>
-                        <? endif; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </nav>

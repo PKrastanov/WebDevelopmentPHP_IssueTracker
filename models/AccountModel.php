@@ -27,8 +27,6 @@ class AccountModel extends BaseModel {
         $statement->execute();
         $registered = $statement->get_result()->fetch_assoc();
 
-        var_dump(password_verify($password, $registered['pass_hash']));
-
         if (password_verify($password, $registered['pass_hash'])) {
             return true;
         }
