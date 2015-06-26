@@ -21,9 +21,17 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="/issues">Issues</a></li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/account/login">Login</a></li>
-                        </ul>
+                        <? if ($_SESSION['username'] == null) : ?>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>Hello <? echo $_SESSION['username'] ?>
+                                    <form action="/account/logout"><input type="submit" value="Logout"/></form>
+                                </li>
+                            </ul>
+                        <? else : ?>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/account/login">Login</a></li>
+                            </ul>
+                        <? endif; ?>
                     </div>
                 </div>
             </nav>
