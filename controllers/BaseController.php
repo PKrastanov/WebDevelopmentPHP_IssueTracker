@@ -54,4 +54,19 @@ abstract class BaseController {
         header("Location: $url");
         die;
     }
+
+    protected function addErrorNotification($errorMsg) {
+        $this->addNotification(ERROR_NOTIFICATION_SESSION_KEY, $errorMsg);
+    }
+
+    protected function addInfoNotification($infoMsg) {
+        $this->addNotification(INFO_NOTIFICATION_SESSION_KEY, $infoMsg);
+    }
+
+    private function addNotification($msgSessionKey, $msgText) {
+        if (!isset($_SESSION[$msgSessionKey])) {
+            $_SESSION[$msgSessionKey] = [];
+        }
+        array_push($_SESSION[$msgSessionKey], $msgText);
+    }
 }

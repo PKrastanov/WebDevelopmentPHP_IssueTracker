@@ -11,33 +11,35 @@ class IssuesController extends BaseController {
 
     public function create() {
         if ($this->isPost()) {
-            $title = $_POST['title'];
-            $description = $_POST['description'];
-            $authorName = $_SESSION['username'];
+            $title = htmlspecialchars($_POST['title']);
+            $description = htmlspecialchars($_POST['description']);
+            $authorName = htmlspecialchars($_SESSION['username']);
             $created = $this->issuesModel->createIssue($title, $description, $authorName);
 
             if ($created) {
+                $this->addInfoNotification($authorName. ' created a issue about "' . $title . '""');
                 $this->redirectToUrl('/');
             }
             else {
-                die ("Can not create issue!");
+                $this->addInfoNotification($authorName. ' can not create issue about "' . $title . '""');
             }
         }
     }
 
     public function edit() {
         if ($this->isPost()) {
-            $title = $_POST['title'];
-            $description = $_POST['description'];
-            $state = $_POST['state'];
-            $id = $_POST['id'];
+            $title = htmlspecialchars($_POST['title']);
+            $description = htmlspecialchars($_POST['description']);
+            $state = htmlspecialchars($_POST['state']);
+            $id = htmlspecialchars($_POST['id']);
             $created = $this->issuesModel->editIssue($title, $description, $state, $id);
 
             if ($created) {
+                $this->addInfoNotification('You successfully edit issue "' . $title . '""');
                 $this->redirectToUrl('/issues/details/' . $id);
             }
             else {
-                die ("Can not edit issue!");
+                $this->addInfoNotification('You can\'t edit issue "' . $title . '""');
             }
         }
         else {
@@ -52,9 +54,9 @@ class IssuesController extends BaseController {
 
     public function comment() {
         if ($this->isPost()) {
-            $comment = $_POST['comment'];
+            $comment = htmlspecialchars($_POST['comment']);
             $id = $_POST['id'];
-            $authorName = $_SESSION['username'];
+            $authorName = htmlspecialchars($_SESSION['username']);
             $created = $this->issuesModel->createComment($comment, $id, $authorName);
 
             if ($created) {

@@ -40,3 +40,4 @@
                 </div>
             </nav>
         </header>
+        <?php include_once('views/layouts/notifications.php'); ?>
