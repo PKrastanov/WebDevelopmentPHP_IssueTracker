@@ -1,7 +1,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="form-horizontal">
-            <form action="/issue/create" method="POST">
+            <form action="/issues/create" method="POST">
                 <div class="form-group">
                     <label for="title" class="col-lg-2 control-label">Title</label>
                     <div class="col-lg-10">

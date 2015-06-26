@@ -20,6 +20,8 @@
         </div>
         <div class="panel-body">
             <?= $this->issue['description'] ?>
+            <p>Author: <?= $this->issue['author'] ?></p>
+            <button class="btn btn-primary pull-right" onclick="window.location='/issues/edit/<?= $this->issue['id'] ?>'">Edit</button>
         </div>
     </div>
 </div>

@@ -13,4 +13,16 @@ class IssueModel extends BaseModel {
         $statement->execute();
         return $statement->get_result()->fetch_assoc();
     }
+
+    public function createIssue($title, $description, $author) {
+        $statement = self::$db->prepare("INSERT INTO Issues (title, description, author) VALUES (?, ?, ?)");
+        $statement->bind_param("sss", $title, $description, $author);
+        $statement->execute();
+
+        if($statement) {
+            return true;
+        }
+
+        return false;
+    }
 }

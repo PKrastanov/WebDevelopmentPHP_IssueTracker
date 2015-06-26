@@ -19,9 +19,9 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                         <ul class="nav navbar-nav">
                             <li><a href="/">Home</a></li>
-                            <?php /*if ($this->isLoggedIn) : */?>
+                            <?php if ($this->isLoggedIn) : ?>
                                 <li><a href="/issues/create">Create Issue</a></li>
-                            <?php /*endif; */?>
+                            <?php endif; ?>
                         </ul>
                         <?php if ($this->isLoggedIn) : ?>
                             <ul class="nav navbar-nav navbar-right">
