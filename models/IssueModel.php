@@ -23,6 +23,11 @@ class IssueModel extends BaseModel {
         return $commentStatement->get_result()->fetch_all();
     }
 
+    public function getLastIssueComments() {
+        $commentStatement = self::$db->query("SELECT * FROM Comments ORDER BY id DESC LIMIT 3");
+        return $commentStatement->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function createIssue($title, $description, $author) {
         $statement = self::$db->prepare("INSERT INTO Issues (title, description, author) VALUES (?, ?, ?)");
         $statement->bind_param("sss", $title, $description, $author);

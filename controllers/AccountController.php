@@ -5,6 +5,8 @@ class AccountController extends BaseController {
 
     public function onInit() {
         $this->db = new AccountModel();
+        $this->issuesModel = new IssueModel();
+        $this->lastComments = $this->issuesModel->getLastIssueComments();
     }
 
     public function index() {
@@ -58,8 +60,13 @@ class AccountController extends BaseController {
     }
 
     public function isValidUsernameAndPassword() {
-        return $_POST['username'] != null && $_POST['password'] != null &&
-            strlen($_POST['username']) > 5 && strlen($_POST['password']) > 5;
+        if ($_POST['username'] != null && $_POST['password'] != null &&
+            strlen($_POST['username']) > 5 && strlen($_POST['password']) > 5) {
+            return true;
+        }
+        else {
+            $this->addErrorNotification('Your username or password is in correct.');
+        }
     }
 
     public function generateToken() {

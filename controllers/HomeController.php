@@ -9,5 +9,6 @@ class HomeController extends BaseController {
 
     public function index() {
         $this->issues = $this->issuesModel->getAllIssues();
+        $this->lastComments = $this->issuesModel->getLastIssueComments();
     }
 }

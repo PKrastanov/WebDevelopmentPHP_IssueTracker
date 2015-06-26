@@ -4,6 +4,7 @@ class IssuesController extends BaseController {
     public function onInit() {
         $this->title = 'Issues';
         $this->issuesModel = new IssueModel();
+        $this->lastComments = $this->issuesModel->getLastIssueComments();
     }
 
     public function index() {
@@ -55,11 +56,15 @@ class IssuesController extends BaseController {
     }
 
     public function comment() {
-        $this->authorize();
         if ($this->isPost()) {
             $comment = htmlspecialchars($_POST['comment']);
             $id = htmlspecialchars($_POST['id']);
-            $authorName = htmlspecialchars($_SESSION['username']);
+            if (!$this->isLoggedIn()) {
+                $authorName = htmlspecialchars($_POST['name']);
+            }
+            else {
+                $authorName = htmlspecialchars($_SESSION['username']);
+            }
             $created = $this->issuesModel->createComment($comment, $id, $authorName);
 
             if ($created) {

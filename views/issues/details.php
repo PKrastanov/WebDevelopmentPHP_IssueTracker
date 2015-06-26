@@ -36,7 +36,7 @@
             </div>
         <?php endforeach ?>
 
-        <?php if ($this->isLoggedIn()) : ?>
+
         <div class="form-horizontal">
             <form action="/issues/comment" method="POST">
                 <input type="hidden" name="id"  value="<?= $this->issue['id'] ?>">
@@ -46,11 +46,18 @@
                         <textarea class="form-control" name="comment" rows="3" id="comment"></textarea>
                     </div>
                 </div>
+                <?php if (!$this->isLoggedIn()) : ?>
+                    <div class="form-group">
+                        <label for="name" class="col-lg-2 control-label">Name</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="name" id="name" />
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <div class="col-lg-10 col-lg-offset-2">
                     <input type="submit" class="btn btn-primary" value="Add Comment"/>
                 </div>
             </form>
         </div>
-        <?php endif; ?>
     </div>
 </div>
