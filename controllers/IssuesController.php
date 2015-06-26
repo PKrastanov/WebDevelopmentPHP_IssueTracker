@@ -26,7 +26,22 @@ class IssuesController extends BaseController {
     }
 
     public function edit() {
-        $this->issue = $this->issuesModel->getIssueById($this->params[0]);
+        if ($this->isPost()) {
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $state = $_POST['state'];
+            $created = $this->issuesModel->editIssue($title, $description, $state);
+
+            if ($created) {
+                $this->redirectToUrl('/issues/details/' . $_POST['id']);
+            }
+            else {
+                die ("Can not edit issue!");
+            }
+        }
+        else {
+            $this->issue = $this->issuesModel->getIssueById($this->params[0]);
+        }
     }
 
     public function details() {

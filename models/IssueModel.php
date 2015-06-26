@@ -25,4 +25,16 @@ class IssueModel extends BaseModel {
 
         return false;
     }
+
+    public function editIssue($title, $description, $state) {
+        $statement = self::$db->prepare("UPDATE Issues SET title = ?, description = ?, state = ?");
+        $statement->bind_param("sss", $title, $description, $state);
+        $statement->execute();
+
+        if($statement) {
+            return true;
+        }
+
+        return false;
+    }
 }
