@@ -22,7 +22,7 @@
                             <li><a href="/issues">Issues</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/login">Login</a></li>
+                            <li><a href="/account/login">Login</a></li>
                         </ul>
                     </div>
                 </div>

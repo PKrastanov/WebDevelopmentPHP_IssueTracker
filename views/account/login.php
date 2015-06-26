@@ -2,8 +2,8 @@
     <div class="container">
         <form class="form-horizontal">
             <fieldset>
-                <legend>Register</legend>
-                <form action="POST">
+                <legend>Login</legend>
+                <form action="/account/login" method="POST">
                     <div class="form-group">
                         <label for="inputEmail" class="col-lg-2 control-label">Name</label>
                         <div class="col-lg-10">
@@ -17,7 +17,8 @@
                         </div>
                     </div>
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn pull-right" onclick="window.location='/account/register'">Register</button>
                     </div>
                 </form>
             </fieldset>
