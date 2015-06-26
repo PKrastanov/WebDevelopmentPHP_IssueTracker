@@ -22,7 +22,9 @@
             <div class="panel-body">
                 <?= $this->issue['description'] ?>
                 <p>Author: <?= $this->issue['author'] ?></p>
+                <?php if ($this->isLoggedIn()) : ?>
                 <button class="btn btn-primary pull-right" onclick="window.location='/issues/edit/<?= $this->issue['id'] ?>'">Edit</button>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -34,18 +36,21 @@
             </div>
         <?php endforeach ?>
 
+        <?php if ($this->isLoggedIn()) : ?>
         <div class="form-horizontal">
-        <form action="/issues/comment" method="POST">
-            <input type="hidden" name="id"  value="<?= $this->issue['id'] ?>">
-            <div class="form-group">
-                <label for="comment" class="col-lg-2 control-label">Comment</label>
-                <div class="col-lg-10">
-                    <textarea class="form-control" name="comment" rows="3" id="comment"></textarea>
+            <form action="/issues/comment" method="POST">
+                <input type="hidden" name="id"  value="<?= $this->issue['id'] ?>">
+                <div class="form-group">
+                    <label for="comment" class="col-lg-2 control-label">Comment</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" name="comment" rows="3" id="comment"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-10 col-lg-offset-2">
-                <input type="submit" class="btn btn-primary" value="Add Comment"/>
-            </div>
-        </form>
+                <div class="col-lg-10 col-lg-offset-2">
+                    <input type="submit" class="btn btn-primary" value="Add Comment"/>
+                </div>
+            </form>
+        </div>
+        <?php endif; ?>
     </div>
 </div>

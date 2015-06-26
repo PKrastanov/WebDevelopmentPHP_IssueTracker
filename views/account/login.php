@@ -14,7 +14,7 @@
                         <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
                     </div>
                 </div>
-                <input type="hidden" name="token" value="<?php echo $this->validateToken ?>">
+                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
                 <div class="col-lg-10 col-lg-offset-2">
                     <input type="submit" class="btn btn-primary" value="Login"/>
                     <button type="button" class="btn pull-right" onclick="window.location='/account/register'">Register</button>

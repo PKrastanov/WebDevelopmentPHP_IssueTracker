@@ -2,7 +2,6 @@
 
 class AccountController extends BaseController {
     protected $db;
-    protected $validateToken;
 
     public function onInit() {
         $this->db = new AccountModel();
@@ -13,12 +12,13 @@ class AccountController extends BaseController {
     }
 
     public function login() {
-        if ($this->isPost() && $this->isValidUsernameAndPassword()) {
+        if ($this->isPost() && $this->isValidUsernameAndPassword() && $_SESSION['token'] == $_POST['token']) {
             $username = htmlspecialchars($_POST['username']);
             $password = htmlspecialchars($_POST['password']);
             $isLoggedIn = $this->db->login($username, $password);
 
             if ($isLoggedIn) {
+                unset($_SESSION['token']);
                 $_SESSION['username'] = $username;
                 $this->addInfoNotification($username . ' login successfully.');
                 $this->redirectToUrl('/');
@@ -26,21 +26,28 @@ class AccountController extends BaseController {
                 $this->addErrorNotification('Login failed please try again.');
             }
         }
+        else {
+            $this->generateToken();
+        }
     }
 
     public function register() {
-        if ($this->isPost() && $this->isValidUsernameAndPassword()) {
+        if ($this->isPost() && $this->isValidUsernameAndPassword() && $_SESSION['token'] == $_POST['token']) {
             $username = htmlspecialchars($_POST['username']);
             $password = htmlspecialchars($_POST['password']);
             $isRegister = $this->db->register($username, $password);
 
             if ($isRegister) {
+                unset($_SESSION['token']);
                 $_SESSION['username'] = $username;
                 $this->addInfoNotification($username . ' register successfully.');
                 $this->redirectToUrl('/');
             } else {
                 $this->addErrorNotification('Registration failed please try again.');
             }
+        }
+        else {
+            $this->generateToken();
         }
     }
 
@@ -62,7 +69,7 @@ class AccountController extends BaseController {
         for ($i = 0; $i < 50; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-        return $randomString;
+        $_SESSION['token'] = $randomString;
     }
 
 }

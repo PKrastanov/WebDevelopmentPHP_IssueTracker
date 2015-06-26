@@ -10,6 +10,7 @@ class IssuesController extends BaseController {
     }
 
     public function create() {
+        $this->authorize();
         if ($this->isPost()) {
             $title = htmlspecialchars($_POST['title']);
             $description = htmlspecialchars($_POST['description']);
@@ -27,6 +28,7 @@ class IssuesController extends BaseController {
     }
 
     public function edit() {
+        $this->authorize();
         if ($this->isPost()) {
             $title = htmlspecialchars($_POST['title']);
             $description = htmlspecialchars($_POST['description']);
@@ -53,6 +55,7 @@ class IssuesController extends BaseController {
     }
 
     public function comment() {
+        $this->authorize();
         if ($this->isPost()) {
             $comment = htmlspecialchars($_POST['comment']);
             $id = $_POST['id'];
